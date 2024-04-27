@@ -6,6 +6,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" index element={<Pages.HomePage/>}/>
+      <Route path="/:id" element={<Pages.UserPage/>}/>
     </Routes>
   )
 }
