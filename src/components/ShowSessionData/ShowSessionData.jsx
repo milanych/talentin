@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function ShowSessionData({ user }) {
+  const statuses = ['Unbooked', 'Booked', 'Completed', 'Forfeited', 'Void'];
+  const [currentId, setCurrentId] = useState(null)
+  const [sessionDate, setSessionDate] = useState(null);
+  const [sessionStatus, setSessionStatus] = useState(null);
+  const [showInput, setShowInput] = useState(false);
 
+ const showInputSessionEdit = (e) => {
+   setCurrentId(e)
+   setShowInput(true);
+  }
+  const handleSessionDateEdit = (e) => setSessionDate(e.target.value);
+  const handleSessionStatusEdit = (e) => setSessionStatus(e.target.value);
 return (
   <>
     <h2>Sessions</h2>
     {user.sessions.map((session, index) => (
-      <div key={index}>
+      <div key={index} className='mb-4 border p-4 rounded flex flex-col min-w-48'>
         <h3>{index+1} {session.type}</h3>
-        <div>{session.date !== null ? new Date(session.date).toLocaleString('en', { year: 'numeric', month: 'long', day: 'numeric' }) : 'No date'}</div>
-        <div>{session.status.title}</div>
+
+        <div className='flex justify-between py-2 border-b-2'>
+          {showInput && session.id === currentId
+          ? <input type="date" className='border' value={session.date} onChange={(e) => handleSessionDateEdit(e)} />
+          : !showInput && session.id === currentId && sessionDate 
+          ? sessionDate : session.date !== null ? new Date(session.date).toLocaleString('en', { year: 'numeric', month: 'long', day: 'numeric' }) : 'No date'
+        }
+        </div>
+
+        <div className='flex justify-between py-2'>
+          {session.status.title}
+        </div>
+
+        <button onClick={!showInput ? () => showInputSessionEdit(session.id) : () => setShowInput(false)} className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg px-5 py-2.5 me-2 my-2">{!showInput ? 'Edit session' : 'Save session'}</button>
       </div>
     ))}
   </>
