@@ -22,14 +22,27 @@ return (
 
         <div className='flex justify-between py-2 border-b-2'>
           {showInput && session.id === currentId
-          ? <input type="date" className='border' value={session.date} onChange={(e) => handleSessionDateEdit(e)} />
+          ? <input type="date" className='border' value={session.date} onChange={handleSessionDateEdit} />
           : !showInput && session.id === currentId && sessionDate 
-          ? sessionDate : session.date !== null ? new Date(session.date).toLocaleString('en', { year: 'numeric', month: 'long', day: 'numeric' }) : 'No date'
+            ? sessionDate : session.date !== null ? new Date(session.date).toLocaleString('en', { year: 'numeric', month: 'long', day: 'numeric' }) 
+            : 'No date'
         }
         </div>
 
         <div className='flex justify-between py-2'>
-          {session.status.title}
+          {showInput && session.id === currentId 
+          ? <select value={sessionStatus || session.status.title} onChange={handleSessionStatusEdit}>
+            {statuses.map((status, index) => (
+              <option key={index} value={status}>
+                {status}
+              </option>
+              )
+            )}
+            </select>
+          : !showInput && session.id === currentId && sessionStatus 
+            ? sessionStatus 
+            : session.status.title
+          }
         </div>
 
         <button onClick={!showInput ? () => showInputSessionEdit(session.id) : () => setShowInput(false)} className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg px-5 py-2.5 me-2 my-2">{!showInput ? 'Edit session' : 'Save session'}</button>
