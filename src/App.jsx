@@ -4,10 +4,12 @@ import * as Pages from './pages'
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" index element={<Pages.HomePage/>}/>
-      <Route path="/:id" element={<Pages.UserPage/>}/>
-    </Routes>
+    <div className='flex justify-center items-center h-full'>
+      <Routes>
+        <Route path="/" index element={<Pages.HomePage/>}/>
+        <Route path="/:id" element={<Pages.UserPage/>}/>
+      </Routes>
+    </div>
   )
 }
 

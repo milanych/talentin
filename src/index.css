@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+  h1 {
+    @apply text-4xl mb-1 font-semibold;
+  }
+  h2 {
+    @apply text-2xl mt-6 mb-3 font-semibold;
+  }
+  h3 {
+    @apply text-lg font-semibold;
+  }
+  a {
+    @apply text-blue-600 underline;
+  }
+}
+#root {
+  height: 100dvh
+}
