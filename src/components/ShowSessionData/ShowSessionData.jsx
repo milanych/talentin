@@ -16,6 +16,7 @@ function ShowSessionData({ user }) {
 return (
   <>
     <h2>Sessions</h2>
+    <div className='flex justify-between flex-wrap'>
     {user.sessions.map((session, index) => (
       <div key={index} className='mb-4 border p-4 rounded flex flex-col min-w-48'>
         <h3>{index+1} {session.type}</h3>
@@ -48,6 +49,8 @@ return (
         <button onClick={!showInput ? () => showInputSessionEdit(session.id) : () => setShowInput(false)} className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg px-5 py-2.5 me-2 my-2">{!showInput ? 'Edit session' : 'Save session'}</button>
       </div>
     ))}
+        </div>
+        <button className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg px-5 py-2.5 me-2 my-2">Add a bundle</button>
   </>
 )}
 
