@@ -19,6 +19,7 @@ function ShowSessionData({ user }) {
   const handleDeleteSession = (id) => {
     setDeletedSessions([...deletedSessions, id])
   }
+
 return (
   <>
     <h2>Sessions</h2>
@@ -59,7 +60,7 @@ return (
       </div>
     )))}
         </div>
-        <button className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg px-5 py-2.5 me-2 my-2">Add a bundle</button>
+
   </>
 )}
 
