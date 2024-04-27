@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import {EditBundleDuration, EditBundleDeadline} from '../index';
+import {EditBundleDuration, EditBundleDeadline,EditBundleCoach} from '../index';
 
-function ShowUserData({ user }) {
+function ShowUserData({ user, bundles }) {
 
 
 
@@ -12,18 +12,11 @@ return (
     <div>{user.user.is_active ? 'Active' : 'Inactive'}</div>
     <div><a href={`mailto:${user.user.email}`}>{user.user.email}</a></div>
   </div>
-
-<div className='rounded border p-4'>
-    
-
+  <div className='rounded border p-4'>
     <EditBundleDeadline user={user}/>
     <EditBundleDuration user={user}/>
-    <div className='flex justify-between py-2'>
-      <div>Bundle coach</div>
-      <div>{`${user.coach.first_name} ${user.coach.last_name}`}</div>
-    </div>
-</div>
-
+    <EditBundleCoach user={user} bundles={bundles}/>
+  </div>
   </>
 )
 }

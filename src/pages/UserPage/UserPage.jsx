@@ -11,7 +11,7 @@ function UserPage() {
       <Link to='/' className='mb-6'>
         ← Home Page
       </Link>
-      <ShowUserData user={user}/>
+      <ShowUserData user={user} bundles={bundles}/>
       <ShowSessionData user={user}/>
     </div>
   );
