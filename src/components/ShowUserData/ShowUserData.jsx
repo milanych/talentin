@@ -11,7 +11,18 @@ function ShowUserData({ user }) {
     setShowBundleDeadlineInput(false);
     setBundleDeadline(bundleDeadline);
   }
-  
+
+    //edit bundle duration
+  const [bundleDuration, setBundleDuration] = useState(user.duration_mins);
+  const [showBundleDurationInput, setShowBundleDurationInput] = useState(false);
+
+  const handleBundleDurationEdit = (e) => setBundleDuration(e.target.value);
+
+  const saveBundleDuration = () => {
+    setShowBundleDurationInput(false);
+    setBundleDuration(bundleDuration);
+  }
+
 return (
   <>
   <div className='mb-6'>
@@ -30,9 +41,15 @@ return (
       </div>
       <div><button className='text-blue-600 dark:text-blue-500 underline' onClick={!showBundleDeadlineInput ? ()=>setShowBundleDeadlineInput(true) : saveBundleDeadline}>{!showBundleDeadlineInput ? 'edit' : 'save'}</button></div>
     </div>
+
     <div className='flex justify-between py-2 border-b-2'>
       <div>Bundle duration</div>
-      <div>{user.duration_mins}</div>
+      <div>
+        {showBundleDurationInput 
+          ? <input type="number" className='border' value={bundleDuration} onChange={handleBundleDurationEdit} />
+          : `${bundleDuration} mins`}
+        </div>
+        <div><button className='text-blue-600 dark:text-blue-500 underline' onClick={!showBundleDurationInput ? () => setShowBundleDurationInput(true) : saveBundleDuration}>{!showBundleDurationInput ? 'edit' : 'save'}</button></div>
     </div>
     <div className='flex justify-between py-2'>
       <div>Bundle coach</div>
