@@ -13,14 +13,23 @@ function ShowSessionData({ user }) {
   }
   const handleSessionDateEdit = (e) => setSessionDate(e.target.value);
   const handleSessionStatusEdit = (e) => setSessionStatus(e.target.value);
+
+  //delete element
+  const [deletedSessions, setDeletedSessions] = useState([])
+  const handleDeleteSession = (id) => {
+    setDeletedSessions([...deletedSessions, id])
+  }
 return (
   <>
     <h2>Sessions</h2>
     <div className='flex justify-between flex-wrap'>
     {user.sessions.map((session, index) => (
+      !deletedSessions.includes(session.id) && (
       <div key={index} className='mb-4 border p-4 rounded flex flex-col min-w-48'>
+        <div className='flex items-center justify-between'>
         <h3>{index+1} {session.type}</h3>
-
+        {session.date == null && <button onClick={() => handleDeleteSession(session.id)}>delete</button> }
+        </div>
         <div className='flex justify-between py-2 border-b-2'>
           {showInput && session.id === currentId
           ? <input type="date" className='border' value={session.date} onChange={handleSessionDateEdit} />
@@ -48,7 +57,7 @@ return (
 
         <button onClick={!showInput ? () => showInputSessionEdit(session.id) : () => setShowInput(false)} className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg px-5 py-2.5 me-2 my-2">{!showInput ? 'Edit session' : 'Save session'}</button>
       </div>
-    ))}
+    )))}
         </div>
         <button className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg px-5 py-2.5 me-2 my-2">Add a bundle</button>
   </>
